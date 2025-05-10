@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kandk Game Lab</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-light: #f5f0e6;
+      --bg-dark: #1a1a2e;
+      --text-light: #1a1a2e;
+      --text-dark: #f5f0e6;
+      --card-light: #e0dbd1;
+      --transition-speed: 0.4s;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+    }
+
+    body.dark {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    /* Navbar */
+    header {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .logo span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #f1c40f;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .theme-toggle {
+      width: 40px;
+      height: 20px;
+      background-color: #999;
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .theme-toggle .circle {
+      width: 18px;
+      height: 18px;
+      background-color: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      transition: 0.3s;
+    }
+
+    body.dark .theme-toggle .circle {
+      right: 21px;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      height: 3px;
+      width: 25px;
+      background-color: white;
+      margin: 3px 0;
+      transition: 0.4s;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--bg-dark);
+        padding: 10px 0;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .controls {
+        margin-top: 10px;
+      }
+    }
+
+    main {
+      padding: 30px 15px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      border-right: 5px solid var(--text-light);
+      padding-right: 10px;
+    }
+
+    body.dark h2 {
+      border-right-color: var(--text-dark);
+    }
+
+    .services ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .services li {
+      background-color: var(--card-light);
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+
+    .services li:hover {
+      transform: scale(1.02);
+    }
+
+    .social-icons a {
+      margin: 0 10px;
+      color: inherit;
+      text-decoration: none;
+      font-size: 24px;
+      transition: color 0.3s;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="K.png" alt="شعار Kandk Game Lab">
+        <span>Kandk Game Lab</span>
+      </div>
+
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">services</a></li>
+        <li><a href="#social">social</a></li>
+      </ul>
+
+      <div class="controls">
+        <div class="theme-toggle" onclick="toggleDarkMode()">
+          <div class="circle"></div>
+        </div>
+        <button onclick="toggleLanguage()">EN/AR</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="about" id="about">
+      <h2 id="about-title">من نحن؟</h2>
+      <p id="about-text">
+        Kandk Game Lab هي قناة تهتم بتعليم وتطوير ألعاب الفيديو باستخدام محرك Godot و GDScript، نقدم شروحات، مشاريع واقعية، ونصائح للمطورين العرب.
+      </p>
+    </section>
+
+    <section class="services" id="services">
+      <h2 id="services-title">خدماتنا</h2>
+      <ul id="services-list">
+        <li>شروحات برمجة الألعاب باستخدام Godot</li>
+        <li>مشاريع تطبيقية مخصصة للمبتدئين والمتوسطين</li>
+        <li>تحليل ألعاب مشهورة وتطبيق تقنياتها</li>
+        <li>إجابات على أسئلتكم من خلال التعليقات أو البث المباشر</li>
+      </ul>
+    </section>
+
+    <section class="social" id="social">
+      <h2 id="social-title">تابعنا على</h2>
+      <div class="social-icons">
+        <a href="https://www.youtube.com/channel/UChU5UNWwXzjWUrkf9xrL2Dw" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.instagram.com/kandk__gamelab" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Kandk Game Lab. جميع الحقوق محفوظة.
+  </footer>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
+
+    let isArabic = true;
+    function toggleLanguage() {
+      isArabic = !isArabic;
+      document.documentElement.lang = isArabic ? 'ar' : 'en';
+      document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
+
+      document.getElementById("about-title").textContent = isArabic ? "من نحن؟" : "About Us";
+      document.getElementById("about-text").textContent = isArabic
+        ? "Kandk Game Lab هي قناة تهتم بتعليم وتطوير ألعاب الفيديو باستخدام محرك Godot و GDScript، نقدم شروحات، مشاريع واقعية، ونصائح للمطورين العرب."
+        : "Kandk Game Lab is a channel focused on teaching and developing video games using the Godot engine and GDScript. We offer tutorials, practical projects, and tips for Arabic-speaking developers.";
+
+      document.getElementById("services-title").textContent = isArabic ? "خدماتنا" : "Our Services";
+      document.getElementById("services-list").innerHTML = isArabic
+        ? `<li>شروحات برمجة الألعاب باستخدام Godot</li>
+           <li>مشاريع تطبيقية مخصصة للمبتدئين والمتوسطين</li>
+           <li>تحليل ألعاب مشهورة وتطبيق تقنياتها</li>
+           <li>إجابات على أسئلتكم من خلال التعليقات أو البث المباشر</li>`
+        : `<li>Tutorials on game development with Godot</li>
+           <li>Practical projects for beginners and intermediates</li>
+           <li>Analysis of famous games and applying their techniques</li>
+           <li>Answers to your questions via comments or live streams</li>`;
+
+      document.getElementById("social-title").textContent = isArabic ? "تابعنا على" : "Follow us on";
+    }
+
+    function toggleMenu() {
+      document.getElementById("nav-links").classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
