@@ -187,3 +187,12 @@
       background-color: var(--bg-dark);
       color: var(--text-dark);
     }
+.zoom-out-hover {
+  display: inline-block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.zoom-out-hover:hover {
+  transform: scale(0.95);
+  box-shadow: 0 0 10px rgba(0, 201, 255, 0.3);
+}
